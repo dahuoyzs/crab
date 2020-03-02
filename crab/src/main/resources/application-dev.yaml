@@ -1,0 +1,48 @@
+#server配置
+server:
+  port: 80                                        #启动端口号
+  servlet:
+    path: /crab                                  #项目名,请求根路径,如:www.bigfire.cn/crab/
+  compression:
+    enabled: true                                #以下格式文件进行压缩处理
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+#spring配置
+spring:
+  jackson:                                        #jackson配置
+    date-format: yyyy-MM-dd HH:mm:ss              #时间格式化方式
+    time-zone: GMT+8                              #解决时间相差8小时问题
+  output:                                         #output控制台配置
+    ansi:
+      enabled: always                             #控制台 输出待颜色的配置
+  datasource:                                     #数据库 配置
+    type: com.alibaba.druid.pool.DruidDataSource  #数据库 连接池选择
+    driver-class-name: com.mysql.jdbc.Driver      #数据库 驱动
+    url: jdbc:mysql://localhost:3306/crab?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false  #本地地址
+    username: root                                #数据库 用户名
+    password: 123456                              #数据库 密码
+  servlet:
+    multipart:
+      max-file-size: 10240MB                      #文件上传大小设置为1G
+      max-request-size: 10240MB                   #请求大小设置为1G
+#mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml   #Mapper文件位置
+  global-config:                                  #数据库相关配置
+    db-config:
+      id-type: AUTO                               #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      logic-delete-value: 1                       #查询的时候 自动区分 @tableLogic注解标识的字段值为1则视为删除的数据
+      logic-not-delete-value: 0                   #查询的时候 自动区分 @tableLogic注解标识的字段值为0则视为未删除数据
+      table-underline: true                       #驼峰下划线转换
+    banner: false                                 #关闭mybatis-plus的banner
+  configuration:                                  #原生配置
+    map-underscore-to-camel-case: true            #下划线与驼峰转换配置
+    cache-enabled: false                          #缓存，关闭
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  type-enums-package: cn.bigfire.crab.common.enums
+
+#自定义配置
+crab:
+  base-url: http://localhost:${server.port}${server.servlet.path}/        #http://localhost:80/crab/
+  sys-email-active-url: ${crab.base-url}sys/email/active                  #http://localhost:80/crab/sys/email/active
+

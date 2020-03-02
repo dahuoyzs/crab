@@ -1,0 +1,72 @@
+###index
+GET {{baseUrl}}//
+
+###测试Result工具类的格式是否正确
+GET {{baseUrl}}/test/result
+
+###zero异常测试
+GET {{baseUrl}}/test/zero
+
+###耗时接口测试
+GET {{baseUrl}}/test/sleep
+
+###文件上传测试
+POST {{baseUrl}}/test/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.mp4"
+
+
+< C:\Users\bigfire\Desktop\ss\test.mp4
+
+###删除文件
+DELETE {{baseUrl}}/test/upload/del?key=upload/2020/2/5b9d288c0a9348e5b7d2273962fdbcf1-test.mp4
+
+###添加系统用户
+POST {{baseUrl}}/test/sys/user
+Content-Type: application/json
+
+{
+  "id":3,
+  "username": "test01",
+  "nickname": "小火",
+  "realname": "张文铮",
+  "password": "123456",
+  "phone": "13619887123",
+  "email": "8354760@qq.com",
+  "avatar": "http://oss.bigfire.cn/project/crab/image/avatar/man.jpg",
+  "userStatus": 1,
+  "phoneStatus": 1,
+  "emailStatus": "EXPIRED",
+  "creatorId": 1,
+  "remark": null,
+  "createTime": null,
+  "updateTime": "2020-02-11 23:00:34",
+  "deleted": 0
+}
+###查询系统用户
+GET {{baseUrl}}/test/sys/user
+
+###根据id查询系统用户
+GET {{baseUrl}}/test/user?id=3
+
+###
+
+###更新系统用户
+PUT {{baseUrl}}/test/sys/user
+Content-Type: application/json
+
+{
+  "id":3,
+  "username": "test01",
+  "nickname": "小火",
+  "realname": "嘿嘿",
+  "password": "123456",
+  "emailStatus": 1
+
+}
+
+###
+
+

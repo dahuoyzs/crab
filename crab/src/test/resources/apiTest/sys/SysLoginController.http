@@ -1,0 +1,9 @@
+###系统登录
+POST {{baseUrl}}/sys/login
+Content-Type: application/json
+
+{
+  "username": "bigfire",
+  "password": "123456"
+}
+

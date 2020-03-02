@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    active: dev
+#环境配置，dev本地开发版本,test测试服版本,prod正式服版本
